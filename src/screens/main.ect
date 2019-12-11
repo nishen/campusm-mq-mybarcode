@@ -1,0 +1,242 @@
+<<
+@configure
+  connected: true
+  title:"My Barcode"
+  scripts:[
+    "main"
+  ]
+  stylesheets:[
+    "main"
+  ]
+>>
+
+<< extend "templates/master.ect" >>
+
+<< block 'init': >>
+    {% set svcUserData = aek.get_service("ALMA_SERVICE") %}
+    {% set user = svcUserData.json %}
+<< end >>
+
+<< block 'head': >>
+    <script>
+        sessionStorage.setItem('barcode', '{{ user.barcode }}');
+    </script>
+
+    <style>
+        body {
+            margin: 10px;
+        }
+
+        div.container-1 {
+            float: left;
+            width: 150px;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        div.pillar-1 {
+            position: relative;
+            top: -50px;
+            left: 40px;
+            width: 35px;
+            height: 370px;
+            background-color: #6d001f;
+            transform: rotate(45deg);
+        }
+
+        div.container-2 {
+            float: left;
+            margin-left: -123px;
+            width: 185px;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        div.pillar-2 {
+            position: relative;
+            top: -40px;
+            left: 50px;
+            width: 35px;
+            height: 370px;
+            background-color: #d4118c;
+            transform: rotate(45deg);
+        }
+
+        div.container-3 {
+            float: left;
+            margin-left: -138px;
+            width: 185px;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        div.pillar-3 {
+            position: relative;
+            top: -40px;
+            left: 50px;
+            width: 35px;
+            height: 370px;
+            background-color: #af122a;
+            transform: rotate(45deg);
+        }
+
+        div.container-4 {
+            float: left;
+            margin-left: -136px;
+            width: 125px;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        div.pillar-4 {
+            position: relative;
+            top: -40px;
+            left: 50px;
+            width: 35px;
+            height: 370px;
+            background-color: #770156;
+            transform: rotate(45deg);
+        }
+
+        div.pillar-design-container {
+            padding-top: 135px;
+        }
+
+        div.mqcard {
+            width: 500px;
+            height: 300px;
+            background: #f0ece1;
+            border-radius: 15px;
+            overflow: hidden;
+            zoom: 0.75;
+            margin: auto;
+        }
+
+        div.mqlogo img {
+            position: absolute;
+            margin-left: 20px;
+            margin-top: 5px;
+            width: 200px;
+            height: auto;
+        }
+
+        div.name {
+            position: absolute;
+            margin-left: 20px;
+            margin-top: 80px;
+            width: 200px;
+            height: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+
+        }
+
+        div.identifier-1 {
+            position: absolute;
+            margin-left: 20px;
+            margin-top: 100px;
+            width: 200px;
+            height: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        div.identifier-2 {
+            position: absolute;
+            margin-left: 20px;
+            margin-top: 120px;
+            width: 200px;
+            height: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+
+        }
+
+        div.mq-image-caption {
+            position: absolute;
+            margin-left: 335px;
+            margin-top: 35px;
+            font-family: Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            font-size: 11px;
+            color: #990000;
+        }
+
+        div.mq-image img {
+            position: absolute;
+            margin-left: 330px;
+            margin-top: 52px;
+            width: 130px;
+            height: auto;
+        }
+    </style>
+<< end >>
+
+<< block 'body': >>
+    <h2 class="ui center aligned header"><i class="white barcode icon"></i><div class="content">MY BARCODE</div></h2>
+
+    <div class="ui centered grid main">
+        <div class="sixteen wide column">
+            <div class="barcode-container">
+                <div class="barcode-image">
+                    <img id="barcode" />
+                </div>
+                <div class="barcode-text">
+                    <span>{{ user.barcode }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="sixteen wide column userdata" style="display: none">
+            <div class="ui segment">
+                <div class="ui vertical segment">
+                    <span class="fieldname">Name:</span>
+                    <span class="fielddata">{{ user.first_name }} {{ user.last_name }}</span>
+                </div>
+                <div class="ui vertical segment">
+                    <span class="fieldname">Email address:</span>
+                    <span class="fielddata">{{ user.email }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+            <div class="mqcard">
+                <div class="mqlogo">
+                    <img src="https://portal-ap.campusm.exlibrisgroup.com/assets/aek/mq-mybarcode/0.0.6/mq-logo.png">
+                </div>
+                <div class="name">
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                </div>
+                <div class="identifier-1">
+                    <span>Staff OneID: {{ user.oneid }}</span>
+                </div>
+                <div class="identifier-2" style="display: none">
+                    <span>Student OneID: 12345678</span>
+                </div>
+                <div class="mq-image-caption">
+                    <span>CAMPUS CARD</span>
+                </div>
+                <div class="mq-image">
+                    <img src="https://portal-ap.campusm.exlibrisgroup.com/assets/aek/mq-mybarcode/0.0.6/no-image.png">
+                </div>
+                <div class="pillar-design-container">
+                    <div class="container-1">
+                        <div class="pillar-1"></div>
+                    </div>
+                    <div class="container-2">
+                        <div class="pillar-2"></div>
+                    </div>
+                    <div class="container-3">
+                        <div class="pillar-3"></div>
+                    </div>
+                    <div class="container-4">
+                        <div class="pillar-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<< end >>

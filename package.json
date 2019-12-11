@@ -1,0 +1,38 @@
+{
+  "name": "@ombiel/mq-mybarcode",
+  "version": "0.0.6",
+  "repository": "-",
+  "license": "-",
+  "scripts": {
+    "start": "node ./node_modules/gulp/bin/gulp.js"
+  },
+  "dependencies": {
+    "@ombiel/aek-css": "0.2.x",
+    "@ombiel/aek-lib": "react15",
+    "react": "15.4",
+    "react-dom": "15.4"
+  },
+  "devDependencies": {
+    "@ombiel/aek-asset-store": "0.0.x",
+    "@ombiel/aek-buildtools": "0.2.12",
+    "@ombiel/aek-cli": "0.3.6",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-plugin-react": "^7.11.1",
+    "gulp": "^3.8.11",
+    "run-sequence": "^1.0.2"
+  },
+  "ombiel": {
+    "boilerplate": "@ombiel/exlib-boilerplate-aek-react@0.2.12-react15-2",
+    "access": {
+      "write": {
+        "users": [
+          "[username]"
+        ]
+      }
+    },
+    "runserver": {
+      "hostname": "[campusm-server]"
+    }
+  }
+}
